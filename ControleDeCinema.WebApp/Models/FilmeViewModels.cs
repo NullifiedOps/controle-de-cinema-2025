@@ -9,7 +9,7 @@ public abstract class FormularioFilmeViewModel
 {
     [Required(ErrorMessage = "O campo \"Título\" é obrigatório.")]
     [MinLength(2, ErrorMessage = "O campo \"Título\" precisa conter ao menos 2 caracteres.")]
-    [MaxLength(100, ErrorMessage = "O campo \"Título\" precisa conter no máximo 50 caracteres.")]
+    [MaxLength(50, ErrorMessage = "O campo \"Título\" precisa conter no máximo 50 caracteres.")]
     public string? Titulo { get; set; }
 
     [Required(ErrorMessage = "O campo \"Duracão\" é obrigatório.")]
