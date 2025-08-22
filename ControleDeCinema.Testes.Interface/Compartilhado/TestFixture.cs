@@ -3,7 +3,7 @@ using DotNet.Testcontainers.Builders;
 using DotNet.Testcontainers.Containers;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
 using Testcontainers.PostgreSql;
 
@@ -108,7 +108,7 @@ public abstract class TestFixture
             .WithNetworkAliases("controle-de-cinema-webapp")
             .WithName("controle-de-cinema-webapp")
             .WithEnvironment("SQL_CONNECTION_STRING", connectionStringRede)
-            .WithEnvironment("NEWRELIC_LICENCE_KEY", configuracao?["NEWRELIC_LICENCE_KEY"])
+            .WithEnvironment("NEWRELIC_LICENSE_KEY", configuracao?["NEWRELIC_LICENSE_KEY"])
             .WithWaitStrategy(Wait.ForUnixContainer()
                 .UntilPortIsAvailable(appPort)
                 .UntilHttpRequestIsSucceeded(r => r.ForPort((ushort)appPort).ForPath("/health"))
@@ -124,7 +124,7 @@ public abstract class TestFixture
     private static async Task InicializarWebDriverAsync(DotNet.Testcontainers.Networks.INetwork rede)
     {
         seleniumContainer = new ContainerBuilder()
-            .WithImage("selenium/standalone-firefox:nightly")
+            .WithImage("selenium/standalone-chrome:nightly")
             .WithPortBinding(seleniumPort, true)
             .WithNetwork(rede)
             .WithNetworkAliases("controle-de-cinema-selenium-e2e")
@@ -137,7 +137,7 @@ public abstract class TestFixture
 
         var enderecoSelenium = new Uri($"http://{seleniumContainer.Hostname}:{seleniumContainer.GetMappedPublicPort(seleniumPort)}/wd/hub");
 
-        var options = new FirefoxOptions();
+        var options = new ChromeOptions();
         options.AddArgument("--start-maximized");
 
         driver = new RemoteWebDriver(enderecoSelenium, options);
