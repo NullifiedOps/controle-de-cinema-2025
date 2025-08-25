@@ -78,4 +78,11 @@ public class AutentificacaoFormPageObject
 
         return new AutentificacaoIndexPageObject(driver!);
     }
+
+    public AutentificacaoFormPageObject ClickCriarContaForm()
+    {
+        wait.Until(d => d?.FindElement(By.CssSelector("a[data-se='btnCadastrar']"))).Click();
+        
+        return this;
+    }
 }

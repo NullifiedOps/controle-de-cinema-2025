@@ -21,8 +21,4 @@
     <ProjectReference Include="..\ControleDeCinema.Infraestrutura.Orm\ControleDeCinema.Infraestrutura.Orm.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ModuloGeneroFilme\" />
-  </ItemGroup>
-
 </Project>

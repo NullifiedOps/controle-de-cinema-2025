@@ -32,14 +32,14 @@
             </ul>
 
             <div class="dropdown ms-5">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-se="btnUsuario">
                     <i class="bi bi-person-circle"></i>
                     @User.Identity?.Name
                 </button>
                 <ul class="dropdown-menu">
                     <li>
                         <form asp-controller="Autenticacao" asp-action="Logout" method="post">
-                            <button class="dropdown-item" type="submit">Logout</button>
+                            <button class="dropdown-item" type="submit" data-se="btnLogout">Logout</button>
                         </form>
                     </li>
                 </ul>

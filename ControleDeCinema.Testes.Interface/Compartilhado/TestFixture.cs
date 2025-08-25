@@ -4,7 +4,9 @@ using DotNet.Testcontainers.Containers;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using System.Data.Common;
 using Testcontainers.PostgreSql;
 
 namespace ControleDeCinema.Testes.Interface.Compartilhado;
@@ -15,6 +17,7 @@ public abstract class TestFixture
     protected static IWebDriver? driver;
     protected static ControleDeCinemaDbContext? dbContext;
     protected static string? enderecoBase;
+    //protected static string? enderecoBase = "https://localhost:7131";
 
     private static IDatabaseContainer? dbContainer;
     private static readonly int dbPort = 5432;
@@ -26,6 +29,8 @@ public abstract class TestFixture
     private static readonly int seleniumPort = 4444;
 
     private static IConfiguration? configuracao;
+
+    //private readonly static string connectionString =  "Host=localhost;Port=5432;Database=ControleDeCinemaDb;Username=postgres;Password=YourStrongPassword";
 
     [AssemblyInitialize]
     public static async Task ConfigurarTestes(TestContext _)
@@ -45,11 +50,13 @@ public abstract class TestFixture
         await InicializarAplicacaoAsync(rede);
 
         await InicializarWebDriverAsync(rede);
+        //InicializarDriver();
     }
 
     [AssemblyCleanup]
     public static async Task EncerrarTestes()
     {
+        //FinalizarDriver();
         await FinalizarWebDriverAsync();
 
         await EncerrarAplicacaoAsync();
@@ -64,8 +71,27 @@ public abstract class TestFixture
             throw new ArgumentNullException("O banco de dados não foi inicializado.");
 
         dbContext = ControleDeCinemaDbContextFactory.CriarDbContext(dbContainer.GetConnectionString());
+        //dbContext = ControleDeCinemaDbContextFactory.CriarDbContext(connectionString);
 
         ConfigurarTabelas(dbContext);
+
+        driver!.Manage()
+            .Cookies.DeleteAllCookies();
+    }
+
+    private static void InicializarDriver()
+    {
+        var options = new ChromeOptions();
+        options.AddArgument("--start-maximized");
+
+        driver = new ChromeDriver();
+        driver.Manage().Window.FullScreen();
+    }
+
+    private static void FinalizarDriver()
+    {
+        driver?.Quit();
+        driver?.Dispose();
     }
 
     private static async Task InicializarBancoDadosAsync(DotNet.Testcontainers.Networks.INetwork rede)
@@ -119,6 +145,7 @@ public abstract class TestFixture
         await appContainer.StartAsync();
 
         enderecoBase = $"http://{appContainer.Name}:{appPort}";
+        //enderecoBase = $"http://localhost:{appPort}";
     }
 
     private static async Task InicializarWebDriverAsync(DotNet.Testcontainers.Networks.INetwork rede)
@@ -138,6 +165,7 @@ public abstract class TestFixture
         var enderecoSelenium = new Uri($"http://{seleniumContainer.Hostname}:{seleniumContainer.GetMappedPublicPort(seleniumPort)}/wd/hub");
 
         var options = new ChromeOptions();
+        options.AddArgument("--window-size=1920,1080");
         options.AddArgument("--start-maximized");
 
         driver = new RemoteWebDriver(enderecoSelenium, options);
@@ -173,6 +201,12 @@ public abstract class TestFixture
         dbContext.GenerosFilme.RemoveRange(dbContext.GenerosFilme);
         dbContext.Salas.RemoveRange(dbContext.Salas);
         dbContext.Sessoes.RemoveRange(dbContext.Sessoes);
+        
+        dbContext.RoleClaims.RemoveRange(dbContext.RoleClaims);
+        dbContext.Roles.RemoveRange(dbContext.Roles);
+        dbContext.UserClaims.RemoveRange(dbContext.UserClaims);
+        dbContext.Users.RemoveRange(dbContext.Users);
+        dbContext.UserTokens.RemoveRange(dbContext.UserTokens);
 
         dbContext.SaveChanges();
     }
