@@ -24,7 +24,7 @@ public sealed class RepositorioGeneroFilmeEmOrmTests : TestFixture
     }
 
     [TestMethod]
-    public void Deve_Atualizar_Genero_Filme_Corretamente()
+    public void Deve_Editar_Genero_Filme_Corretamente()
     {
         // Arrange
         var genero = new GeneroFilme("Ação");
