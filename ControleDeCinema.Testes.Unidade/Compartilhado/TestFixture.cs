@@ -35,12 +35,6 @@ public abstract class TestFixture
     protected SessaoAppService? sessaoAppService;
     protected SalaAppService? salaAppService;
 
-    protected AutenticacaoAppService? autenticacaoAppService;
-
-    protected Mock<UserManager<Usuario>>? userManager;
-    protected Mock<SignInManager<Usuario>>? signInManager;
-    protected Mock<RoleManager<Cargo>>? roleManager;
-
     protected Mock<ITenantProvider>? tenantProviderMock;
     protected Mock<IUnitOfWork>? unitOfWorkMock;
 
@@ -58,10 +52,6 @@ public abstract class TestFixture
         loggerIngressoMock = new Mock<ILogger<IngressoAppService>>();
         loggerSessaoMock = new Mock<ILogger<SessaoAppService>>();
         loggerSalaMock = new Mock<ILogger<SalaAppService>>();
-
-        userManager = new Mock<UserManager<Usuario>>();
-        signInManager = new Mock<SignInManager<Usuario>>();
-        roleManager = new Mock<RoleManager<Cargo>>();
 
         tenantProviderMock = new Mock<ITenantProvider>();
         unitOfWorkMock = new Mock<IUnitOfWork>();
@@ -98,12 +88,6 @@ public abstract class TestFixture
             repositorioSalaMock.Object, 
             unitOfWorkMock.Object, 
             loggerSalaMock.Object
-        );
-
-        autenticacaoAppService = new AutenticacaoAppService(
-            userManager.Object,
-            signInManager.Object,
-            roleManager.Object
         );
     }
 }
