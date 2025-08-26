@@ -34,6 +34,15 @@ public class Sessao : EntidadeBase<Sessao>
 
     public Ingresso GerarIngresso(int assentoSelecionado, bool meiaEntrada)
     {
+        if (Encerrada)
+            throw new InvalidOperationException("Sessão já foi encerrada.");
+
+        if (Ingressos.Count >= NumeroMaximoIngressos)
+            throw new InvalidOperationException("Sessão lotada. Não é possível vender mais ingressos.");
+
+        if (Ingressos.Any(i => i.NumeroAssento == assentoSelecionado))
+            throw new InvalidOperationException($"O assento {assentoSelecionado} já está ocupado.");
+
         var ingresso = new Ingresso(assentoSelecionado, meiaEntrada, this);
 
         Ingressos.Add(ingresso);

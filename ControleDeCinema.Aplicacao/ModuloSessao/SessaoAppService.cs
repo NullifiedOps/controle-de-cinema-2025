@@ -5,6 +5,7 @@ using ControleDeCinema.Dominio.ModuloSala;
 using ControleDeCinema.Dominio.ModuloSessao;
 using FluentResults;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 
 namespace ControleDeCinema.Aplicacao.ModuloSessao;
 
@@ -40,6 +41,19 @@ public class SessaoAppService
 
         if (duplicada)
             erros.Add("Já existe uma sessão nesta sala para o mesmo horário.");
+        
+        var registros = repositorioSessao.SelecionarRegistros();
+        var inicioNovo = sessao.Inicio;
+        var fimNovo = sessao.Inicio.AddMinutes(sessao.Filme.Duracao);
+
+        var conflito = registros.Any(s =>
+            s.Sala.Id == sessao.Sala.Id &&
+            inicioNovo < s.Inicio.AddMinutes(s.Filme.Duracao) &&
+            fimNovo > s.Inicio
+        );
+
+        if (conflito)
+            erros.Add("Já existe uma sessão nesta sala que conflita com o horário informado.");
 
         if (erros.Any())
             return Result.Fail(erros.Select(ResultadosErro.RegistroDuplicadoErro).ToList());
