@@ -34,6 +34,9 @@ public class FilmeAppService
         if (registros.Any(i => i.Titulo.Equals(filme.Titulo)))
             return Result.Fail(ResultadosErro.RegistroDuplicadoErro("Já existe um filme registrado com este título."));
 
+        if (filme.Duracao <= 0)
+            return Result.Fail(ResultadosErro.RequisicaoInvalidaErro("O tempo do filme deve ser maior do que 0."));
+
         try
         {
             filme.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();

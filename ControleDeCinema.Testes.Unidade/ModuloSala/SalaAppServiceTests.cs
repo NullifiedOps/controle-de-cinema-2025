@@ -1,5 +1,4 @@
-﻿using ControleDeCinema.Dominio.ModuloGeneroFilme;
-using ControleDeCinema.Dominio.ModuloSala;
+﻿using ControleDeCinema.Dominio.ModuloSala;
 using ControleDeCinema.Testes.Unidade.Compartilhado;
 using Moq;
 
