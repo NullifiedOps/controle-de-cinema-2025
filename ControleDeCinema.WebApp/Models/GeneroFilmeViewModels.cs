@@ -39,7 +39,9 @@ public class ExcluirGeneroFilmeViewModel
     public Guid Id { get; set; }
     public string Descricao { get; set; }
 
-    public ExcluirGeneroFilmeViewModel(Guid id, string descricao)
+    public ExcluirGeneroFilmeViewModel() { }
+
+    public ExcluirGeneroFilmeViewModel(Guid id, string descricao) : this()
     {
         Id = id;
         Descricao = descricao;
