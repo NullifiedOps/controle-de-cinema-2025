@@ -23,7 +23,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemLogin("cinema@gmail.com"));
+        Assert.IsTrue(autentificacaoIndex.ContemLogin("cinema@gmail.com"));
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemLogin("cliente@gmail.com"));
+        Assert.IsTrue(autentificacaoIndex.ContemLogin("cliente@gmail.com"));
     }
 
     [TestMethod]
@@ -70,7 +70,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar(); 
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemLogin("cliente@gmail.com"));
+        Assert.IsTrue(autentificacaoIndex.ContemLogin("cliente@gmail.com"));
     }
 
     [TestMethod]
@@ -99,7 +99,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroAlert("Login ou senha incorretos."));
+        Assert.IsTrue(autentificacaoIndex.ContemErroAlert("Login ou senha incorretos."));
     }
 
     [TestMethod]
@@ -118,7 +118,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroEscrita("Email"));
+        Assert.IsTrue(autentificacaoIndex.ContemErroEscrita("Email"));
     }
 
     [TestMethod]
@@ -136,7 +136,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroEscrita("Senha"));
+        Assert.IsTrue(autentificacaoIndex.ContemErroEscrita("Senha"));
     }
 
     [TestMethod]
@@ -156,7 +156,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroEscrita("Email"));
+        Assert.IsTrue(autentificacaoIndex.ContemErroEscrita("Email"));
     }
 
     [TestMethod]
@@ -176,7 +176,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroAlert("A senha é muito curta."));
+        Assert.IsTrue(autentificacaoIndex.ContemErroAlert("A senha é muito curta."));
     }
 
     [TestMethod]
@@ -196,7 +196,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroAlert("A senha deve conter pelo menos um número."));
+        Assert.IsTrue(autentificacaoIndex.ContemErroAlert("A senha deve conter pelo menos um número."));
     }
 
     [TestMethod]
@@ -216,7 +216,7 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroAlert("A senha deve conter pelo menos uma letra maiúscula."));
+        Assert.IsTrue(autentificacaoIndex.ContemErroAlert("A senha deve conter pelo menos uma letra maiúscula."));
     }
 
     [TestMethod]
@@ -246,6 +246,6 @@ public sealed class AutentificacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsTrue(autentificacaoIndex.ComtemErroAlert("Já existe um usuário com esse nome."));
+        Assert.IsTrue(autentificacaoIndex.ContemErroAlert("Já existe um usuário com esse nome."));
     }
 }

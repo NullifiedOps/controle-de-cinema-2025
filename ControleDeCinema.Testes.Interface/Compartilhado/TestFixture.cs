@@ -30,7 +30,7 @@ public abstract class TestFixture
 
     private static IConfiguration? configuracao;
 
-    //private readonly static string connectionString =  "Host=localhost;Port=5432;Database=ControleDeCinemaDb;Username=postgres;Password=YourStrongPassword";
+    //private readonly static string connectionString = "Host=localhost;Port=5432;Database=ControleDeCinemaDb;Username=postgres;Password=YourStrongPassword";
 
     [AssemblyInitialize]
     public static async Task ConfigurarTestes(TestContext _)
@@ -50,7 +50,7 @@ public abstract class TestFixture
         await InicializarAplicacaoAsync(rede);
 
         await InicializarWebDriverAsync(rede);
-        //InicializarDriver();
+        InicializarDriver();
     }
 
     [AssemblyCleanup]
@@ -84,7 +84,7 @@ public abstract class TestFixture
         var options = new ChromeOptions();
         options.AddArgument("--start-maximized");
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.Manage().Window.FullScreen();
     }
 
@@ -200,6 +200,7 @@ public abstract class TestFixture
         dbContext.Filmes.RemoveRange(dbContext.Filmes);
         dbContext.GenerosFilme.RemoveRange(dbContext.GenerosFilme);
         dbContext.Salas.RemoveRange(dbContext.Salas);
+        dbContext.Ingressos.RemoveRange(dbContext.Ingressos);
         dbContext.Sessoes.RemoveRange(dbContext.Sessoes);
 
         dbContext.UserClaims.RemoveRange(dbContext.UserClaims);
@@ -207,7 +208,5 @@ public abstract class TestFixture
         dbContext.UserTokens.RemoveRange(dbContext.UserTokens);
 
         dbContext.SaveChanges();
-
-
     }
 }

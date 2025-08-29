@@ -44,17 +44,17 @@ public class AutentificacaoIndexPageObject
         return new AutentificacaoFormPageObject(driver!);
     }
 
-    public bool ComtemLogin(string email)
+    public bool ContemLogin(string email)
     {
         return wait.Until(d => d.PageSource.Contains(email));
     }
 
-    public bool ComtemErroEscrita(string erro)
+    public bool ContemErroEscrita(string erro)
     {
         return wait.Until(d => d.FindElement(By.CssSelector($"span[id='{erro}-error']")).Displayed);
     }
 
-    public bool ComtemErroAlert(string erroMsg)
+    public bool ContemErroAlert(string erroMsg)
     {
         wait.Until(d => d.FindElement(By.CssSelector($"div[data-se='alertCard']")).Displayed);
 

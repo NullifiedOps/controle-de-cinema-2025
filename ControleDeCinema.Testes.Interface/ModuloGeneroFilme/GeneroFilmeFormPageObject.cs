@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace ControleDeCinema.Testes.Interface.ModuloGeneroFilme;
@@ -33,6 +34,8 @@ public class GeneroFilmeFormPageObject
 
     public GeneroFilmeIndexPageObject Confirmar()
     {
+        new Actions(driver).ScrollByAmount(0, 500).Perform();
+
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
         return new GeneroFilmeIndexPageObject(driver!);
