@@ -114,21 +114,21 @@ public abstract class TestFixture
 
     private static async Task InicializarAplicacaoAsync(DotNet.Testcontainers.Networks.INetwork rede)
     {
-        //var imagem = new ImageFromDockerfileBuilder()
-        //    .WithDockerfileDirectory(CommonDirectoryPath.GetSolutionDirectory(), string.Empty)
-        //    .WithDockerfile("Dockerfile")
-        //    .WithBuildArgument("RESOURCE_REAPER_SESSION_ID", ResourceReaper.DefaultSessionId.ToString("D"))
-        //    .WithName("controle-de-cinema-app-e2e:latest")
-        //    .Build();
+        var imagem = new ImageFromDockerfileBuilder()
+            .WithDockerfileDirectory(CommonDirectoryPath.GetSolutionDirectory(), string.Empty)
+            .WithDockerfile("Dockerfile")
+            .WithBuildArgument("RESOURCE_REAPER_SESSION_ID", ResourceReaper.DefaultSessionId.ToString("D"))
+            .WithName("controle-de-cinema-app-e2e:latest")
+            .Build();
 
-        //await imagem.CreateAsync().ConfigureAwait(false);
+        await imagem.CreateAsync().ConfigureAwait(false);
 
         var connectionStringRede = dbContainer?.GetConnectionString()
             .Replace(dbContainer.Hostname, "controle-de-cinema-e2e-testdb")
             .Replace(dbContainer.GetMappedPublicPort(dbPort).ToString(), "5432");
 
         appContainer = new ContainerBuilder()
-            .WithImage("controledecinemawebapp:latest")
+            .WithImage(imagem)
             .WithPortBinding(appPort, true)
             .WithNetwork(rede)
             .WithNetworkAliases("controle-de-cinema-webapp")
