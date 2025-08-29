@@ -50,7 +50,7 @@ public abstract class TestFixture
         await InicializarAplicacaoAsync(rede);
 
         await InicializarWebDriverAsync(rede);
-        InicializarDriver();
+        //InicializarDriver();
     }
 
     [AssemblyCleanup]
