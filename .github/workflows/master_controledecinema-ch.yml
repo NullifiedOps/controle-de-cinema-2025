@@ -54,7 +54,7 @@ jobs:
         env:
           ASPNET_ENVIRONMENT: "GITHUB_ACTIONS"
           SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }}
-          NEWRELIC_LICENCE_KEY: ${{ secrets.NEWRELIC_LICENCE_KEY }}
+          NEWRELIC_LICENSE_KEY: ${{ secrets.NEWRELIC_LICENSE_KEY }}
 
   migrate:
     runs-on: windows-latest
@@ -79,7 +79,7 @@ jobs:
         env:
           ASPNET_ENVIRONMENT: "GITHUB_ACTIONS"
           SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }}
-          NEWRELIC_LICENCE_KEY: ${{ secrets.NEWRELIC_LICENSE_KEY }}
+          NEWRELIC_LICENSE_KEY: ${{ secrets.NEWRELIC_LICENSE_KEY }}
 
   deploy:
     runs-on: windows-latest
