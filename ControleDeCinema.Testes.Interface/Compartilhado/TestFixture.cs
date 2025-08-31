@@ -75,8 +75,11 @@ public abstract class TestFixture
 
         ConfigurarTabelas(dbContext);
 
-        driver!.Manage()
-            .Cookies.DeleteAllCookies();
+        if (driver is null)
+            throw new ArgumentNullException("O driver do Selenium não foi inicializado.");
+
+        driver.Navigate().GoToUrl("about:blank");
+        driver.Manage().Cookies.DeleteAllCookies();
     }
 
     private static void InicializarDriver()
