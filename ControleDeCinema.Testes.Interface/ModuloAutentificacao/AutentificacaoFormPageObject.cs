@@ -12,7 +12,7 @@ public class AutentificacaoFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
         wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
     }

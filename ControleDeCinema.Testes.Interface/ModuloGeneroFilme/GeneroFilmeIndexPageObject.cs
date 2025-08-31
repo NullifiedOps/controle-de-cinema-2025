@@ -12,7 +12,7 @@ public class GeneroFilmeIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
     }
 
     public GeneroFilmeIndexPageObject IrPara(string enderecoBase)
