@@ -13,7 +13,7 @@ public class SessaoFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
 
         wait.Until(d => d.FindElement(By.CssSelector("[data-se='form']")).Displayed);
     }

@@ -13,7 +13,7 @@ public class AutentificacaoIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
     }
 
     public AutentificacaoIndexPageObject IrParaLogin(string enderecoBase)

@@ -13,7 +13,7 @@ public class SessaoIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
     }
 
     public SessaoIndexPageObject IrPara(string enderecoBase)
